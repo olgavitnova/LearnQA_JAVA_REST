@@ -7,7 +7,7 @@ public class HelloWorldTest {
 
     public void TestHelloWorld(){
       Response response = RestAssured
-              .get("https://playground.learnqa.ru/api/hello")
+              .get("https://playground.learnqa.ru/ajax/api/longtime_job")
               .andReturn();
       response.prettyPrint();
     }
