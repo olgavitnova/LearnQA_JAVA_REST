@@ -14,6 +14,7 @@ public void testCookies (){
     authData.put("password", "1234");
     Response response = RestAssured
             .given()
+            .body(authData)
             .post("https://playground.learnqa.ru/api/homework_cookie")
             .andReturn();
 Map <String,String> cookies= response.getCookies();
