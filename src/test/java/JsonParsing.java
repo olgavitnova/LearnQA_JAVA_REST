@@ -11,7 +11,7 @@ public class JsonParsing {
                 .get("https://playground.learnqa.ru/api/get_json_homework")
                 .jsonPath();
 
-        String message = response.getString("messages[1]");
+        String message = response.getString("token");
         System.out.println(message);
     }
 }
