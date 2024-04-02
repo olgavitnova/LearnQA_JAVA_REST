@@ -4,6 +4,7 @@ import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import lib.Assertions;
 import lib.BaseTestCase;
+import lib.DataGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.restassured.response.Response;
@@ -18,16 +19,14 @@ public class UserGetTest extends BaseTestCase {
     @Description("Тест на запрос данных другого пользователя")
     @DisplayName("Проверка запроса данных другого пользователя")
     public void testGetUserDetailsAuthOtherUser() {
-        Map<String, String> authData = new HashMap<>();
-        authData.put("email", "vitkotov@example.com");
-        authData.put("password", "1234");
-        Response responseGetAuth = apiCoreRequests.makeRequestGetUserData("https://playground.learnqa.ru/api/user/login",
-                authData);
-        String header = this.getHeader(responseGetAuth, " x-csrf-token");
-        String cookie = this.getCookie(responseGetAuth, " auth_sid");
+        Map<String,String> userData= DataGenerator.getRegistrationData();
+        Map<String,String> authData=new HashMap<>();
+        authData.put("email", userData.get("email"));
+        authData.put("password", userData.get("password"));
 
-        Response responseUserData = apiCoreRequests.makeRequestGetOtherUserData("https://playground.learnqa.ru/api/user/1",
-                header,cookie);
+        Response responseGetAuth =apiCoreRequests.makeRequestGetUserData("https://playground.learnqa.ru/api/user/login",
+                authData);
+        Response responseUserData = apiCoreRequests.makeRequestGetOtherUserData("https://playground.learnqa.ru/api/user/1");
         Assertions.assertJsonHasField(responseUserData, "username");
         Assertions.assertJsonHasNotField(responseUserData, "firstName");
         Assertions.assertJsonHasNotField(responseUserData, "lastName");
