@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import lib.Assertions;
@@ -13,6 +13,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserEditTest extends BaseTestCase {
+    @Epic("Тест кейсы по редактированию нового пользователя")
+    @Feature("Проверки по редактированию пользователя с разными комбинациями")
+    @Owner("Витнова О.А")
+    @Severity(value = SeverityLevel.NORMAL)
+    @Issue(value = "FGY-4627")
+    @TmsLinks({@TmsLink(value = "TL-135"), @TmsLink(value = "TL-158")})
+
 
     @Test
     @Description("Тест на  измения данных пользователя")

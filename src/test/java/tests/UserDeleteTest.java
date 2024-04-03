@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -16,6 +16,11 @@ import lib.ApiCoreRequests;
 public class UserDeleteTest extends BaseTestCase {
 
     private final ApiCoreRequests apiCoreRequests = new ApiCoreRequests();
+    @Epic("Тест кейсы по удалению пользователя")
+    @Owner("Витнова О.А")
+    @Severity(value = SeverityLevel.NORMAL)
+    @Issue(value = "FGY-4627")
+    @TmsLinks({@TmsLink(value = "TL-135"), @TmsLink(value = "TL-158")})
 
     @Test
     @Description("Тест на попытку удалить пользователя по ID 2")
@@ -68,8 +73,11 @@ public class UserDeleteTest extends BaseTestCase {
                 .given()
                 .header("x-csrf-token", this.getHeader(responseGetAuth, "x-csrf-token"))
                 .cookie("auth_sid", this.getCookie(responseGetAuth, "auth_sid"))
-                .get("https://playground.learnqa.ru/api/user/" + userId);
-                responseUserData.prettyPrint();
+                .get("https://playground.learnqa.ru/api/user/" + userId)
+                .andReturn();
+
+        Assertions.assertResponseTextEquals(responseEditUser, "{\"error\":\"User is not exists\"}");
+
 
 
     }
@@ -117,6 +125,6 @@ public class UserDeleteTest extends BaseTestCase {
                 .get("https://playground.learnqa.ru/api/user/1")
                 .andReturn();
 
-        responseUserData.prettyPrint();
+        Assertions.assertResponseTextEquals(responseEditUser, "{\"error\":\"Auth token not supplied\"}");
     }
 }

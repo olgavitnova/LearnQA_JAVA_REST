@@ -1,6 +1,6 @@
 package tests;
 
-import io.qameta.allure.Description;
+import io.qameta.allure.*;
 import io.restassured.RestAssured;
 import lib.Assertions;
 import lib.BaseTestCase;
@@ -14,6 +14,13 @@ import java.util.Map;
 
 public class UserGetTest extends BaseTestCase {
     private final ApiCoreRequests apiCoreRequests=new ApiCoreRequests();
+
+    @Epic("Тест кейсы по получению данных пользователя")
+    @Feature("Проверки по получнию пользователя с разными комбинациями")
+    @Owner("Витнова О.А")
+    @Severity(value = SeverityLevel.NORMAL)
+    @Issue(value = "FGY-4627")
+    @TmsLinks({@TmsLink(value = "TL-135"), @TmsLink(value = "TL-158")})
 
     @Test
     @Description("Тест на запрос данных другого пользователя")
