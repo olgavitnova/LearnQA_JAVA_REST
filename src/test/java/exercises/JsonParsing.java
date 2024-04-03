@@ -1,3 +1,5 @@
+package exercises;
+
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Test;
@@ -14,4 +16,5 @@ public class JsonParsing {
         String message = response.getString("messages[1]");
         System.out.println(message);
     }
+
 }

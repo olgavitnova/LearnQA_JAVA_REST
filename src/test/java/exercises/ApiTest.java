@@ -1,5 +1,8 @@
+package exercises;
+
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import lib.BaseTestCase;
 import org.junit.jupiter.api.Test;
 
 public class ApiTest {
